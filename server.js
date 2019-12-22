@@ -3,9 +3,13 @@ const cors = require('fastify-cors');
 const formbody = require('fastify-formbody');
 const helmet = require('fastify-helmet');
 const mongoose = require('mongoose');
+const fastifySwagger = require('fastify-swagger');
 
 // Routes
 const routes = require('./api/config/routes');
+
+// Swagger
+const swagger = require('./api/config/swagger');
 
 // Connection with MongoDB
 mongoose.connect('mongodb://localhost:27017/test-api', {
@@ -22,6 +26,7 @@ mongoose.connection.once('open', () => console.log('Base de datos conectada'));
 // Middlewares
 fastify.register(formbody);
 fastify.register(helmet);
+fastify.register(fastifySwagger, swagger.options);
 
 // Enable cors
 fastify.register(cors, {
@@ -36,6 +41,7 @@ fastify.register(routes, { prefix: '/api/v1' });
 const start = async () => {
   try {
     await fastify.listen(3000);
+    fastify.swagger();
     fastify.log.info(`server listening on ${fastify.server.address().port}`);
   } catch (err) {
     fastify.log.error(err);
