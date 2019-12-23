@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 exports.options = {
-  routePrefix: '/api/v1/explorer',
+  routePrefix: '/explorer',
   exposeRoute: true,
   swagger: {
     info: {
