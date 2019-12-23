@@ -1,9 +1,9 @@
-const signu = require('./signup');
+const signup = require('./signup');
 const login = require('./login');
 const getOne = require('./get-one');
 
 module.exports = {
-  signu,
+  signup,
   login,
   getOne,
 };
