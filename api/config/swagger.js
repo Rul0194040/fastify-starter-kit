@@ -26,6 +26,11 @@ exports.options = {
         name: 'x-api-key',
         in: 'header',
       },
+      bearer: {
+        type: 'apiKey',
+        name: 'Authorization',
+        in: 'header',
+      },
     },
   },
 };

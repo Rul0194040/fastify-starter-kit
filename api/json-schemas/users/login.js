@@ -4,15 +4,18 @@ module.exports = {
   body: {
     required: ['emailAddress', 'password'],
     properties: {
-      emailAddress: { type: 'string' },
-      password: { type: 'string' },
+      emailAddress: {
+        type: 'string',
+        description: 'Correo electrónico de usuario',
+      },
+      password: { type: 'string', description: 'Contranseña' },
     },
   },
   response: {
     200: {
       type: 'object',
       properties: {
-        token: { type: 'string' },
+        token: { type: 'string', description: 'Token para autenticación' },
       },
     },
   },

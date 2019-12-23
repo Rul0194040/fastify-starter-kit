@@ -2,26 +2,37 @@
 // para acceder a ellas a cada url se le tiene
 // que agregar ese prefijon
 
+// Policies
+const isLoggedWithJwt = require('../policies/is-logged-with-jwt');
+
 // Controllers
 const usersController = require('../controllers/users');
 
 // Json Schemas
-const signupSchema = require('../json-schemas/users/signup');
-const loginSchema = require('../json-schemas/users/login');
+const usersSchema = require('../json-schemas/users/');
 
 module.exports = (fastify, opts, done) => {
   fastify.route({
     method: 'POST',
     url: '/users/signup',
-    schema: signupSchema,
+    schema: usersSchema.signup,
     handler: usersController.signup,
   });
 
   fastify.route({
     method: 'POST',
     url: '/users/login',
-    schema: loginSchema,
+    schema: usersSchema.login,
     handler: usersController.login,
-  }),
-    done();
+  });
+
+  fastify.route({
+    method: 'GET',
+    url: '/users/:id',
+    schema: usersSchema.getOne,
+    preValidation: isLoggedWithJwt,
+    handler: usersController.getOne,
+  });
+
+  done();
 };

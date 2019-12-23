@@ -17,7 +17,7 @@ module.exports = async ({ body }, reply) => {
       const userSaved = await newUser.save();
       const token = jwt.sign({ emailAddress, id: userSaved.id });
 
-      return reply.status(200).send({ token });
+      return reply.status(201).send({ token });
     }
 
     return Boom.badRequest('Las contraseñas no coinciden');
