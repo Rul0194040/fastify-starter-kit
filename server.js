@@ -4,6 +4,7 @@ const formbody = require('fastify-formbody');
 const helmet = require('fastify-helmet');
 const mongoose = require('mongoose');
 const fastifySwagger = require('fastify-swagger');
+const fastifyBoom = require('fastify-boom');
 
 // Routes
 const routes = require('./api/config/routes');
@@ -12,7 +13,7 @@ const routes = require('./api/config/routes');
 const swagger = require('./api/config/swagger');
 
 // Connection with MongoDB
-mongoose.connect('mongodb://localhost:27017/test-api', {
+mongoose.connect('mongodb://localhost:27017/hoy-pasa-db', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -27,6 +28,7 @@ mongoose.connection.once('open', () => console.log('Base de datos conectada'));
 fastify.register(formbody);
 fastify.register(helmet);
 fastify.register(fastifySwagger, swagger.options);
+fastify.register(fastifyBoom);
 
 // Enable cors
 fastify.register(cors, {
